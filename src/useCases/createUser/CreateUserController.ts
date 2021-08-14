@@ -8,13 +8,19 @@ class CreateUserController {
 
     const createUserUseCase = new CreateUserUseCase()
 
-    const user = await createUserUseCase.execute({
-      username,
-      name,
-      password
-    });
+    try {
+      const user = await createUserUseCase.execute({
+        username,
+        name,
+        password
+      });
 
-    return response.json(user);
+
+      return response.json(user);
+    } catch {
+      return response.json({ menssage: "ERRO: Usuario existente" })
+    }
+
   }
 }
 
